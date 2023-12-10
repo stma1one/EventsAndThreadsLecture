@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace CoreCollectionsAsync
 {
-    class BreafastWithAsync
-    {
-
-    }
-
-
-    class TaskExecutorAsync
+    class TaskExecutor
     {
         private string name;
         private int timeInMiliSec;
-        public TaskExecutorAsync(string name, int ms)
+        public TaskExecutor(string name, int ms)
         {
             this.timeInMiliSec = ms;
             this.name = name;
@@ -25,46 +20,49 @@ namespace CoreCollectionsAsync
         public string Name { get { return this.name; } }
         public void Start()
         {
-            for (int i = 0; i < 10; i++)
+            #region With Events
+            for (int i = 0; i < 25; i++)
             {
-                Thread.Sleep(this.timeInMiliSec / 10);
+                Thread.Sleep(this.timeInMiliSec / 25);
                 if (OnProgressUpdate != null)
-                    OnProgressUpdate(this, (i + 1) * 10);
+                    OnProgressUpdate(this, (i + 1) * 4);
             }
             if (OnFinish != null)
                 OnFinish(this);
+            #endregion
         }
-
+        #region With Events
         public delegate void ProgressEventHandler(Object sender, int percent);
         public event ProgressEventHandler OnProgressUpdate;
 
         public delegate void TaskDoneEventHandler(Object sender);
         public event TaskDoneEventHandler OnFinish;
+        #endregion
     }
 
-    class OmletteAsync : TaskExecutorAsync
+    class Omlette : TaskExecutor
     {
-        public OmletteAsync(string name) : base(name, 90000)
+        public Omlette(string name) : base(name, 15000)
         {
 
         }
     }
 
-    class CucumberAsync : TaskExecutorAsync
+    class Cucumber : TaskExecutor
     {
-        public CucumberAsync(string name) : base(name, 5000)
+        public Cucumber(string name) : base(name, 1000)
         { }
     }
 
-    class TomatoAsync : TaskExecutorAsync
+    class Tomato : TaskExecutor
     {
-        public TomatoAsync(string name) : base(name, 1000)
+        public Tomato(string name) : base(name, 1000)
         { }
     }
 
-    class ToastAsync : TaskExecutorAsync
+    class Toast : TaskExecutor
     {
-        public ToastAsync(string name) : base(name, 30000)
+        public Toast(string name) : base(name, 7500)
         {
 
         }

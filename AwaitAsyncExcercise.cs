@@ -78,7 +78,7 @@ namespace AwaitAsyncEx
             while (Bat.Capacity > 0)
             {
                 Console.WriteLine($"{this} {Bat.Percent}% Thread: {Thread.CurrentThread.ManagedThreadId}");
-                Thread.Sleep(1000);
+                Task.Delay(1000);
                 Bat.Usage();
             }
         }

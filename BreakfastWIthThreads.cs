@@ -75,7 +75,7 @@ namespace CoreCollectionsAsync
             }
         }
 
-
+#region Threads
         public static void MakeBreakfastDemo_2()
         {
             DateTime start = DateTime.Now;
@@ -122,7 +122,8 @@ namespace CoreCollectionsAsync
             Console.WriteLine($"Total time in seconds: {length.TotalSeconds}");
 
         }
-            
+    
+
         static List<TaskExecutor> tasks = new List<TaskExecutor>();
         public static void MakeBreakfastDemo_3()
         {
@@ -188,8 +189,9 @@ namespace CoreCollectionsAsync
                 Console.WriteLine($"{obj.Name} is ready!");
             }
         }
+        #endregion
 
-        public static async Task MakeBreakfastDemoAsync_4()
+        public static async Task  MakeBreakfastDemoAsync_4()
         {
             DateTime start = DateTime.Now;
             //Prepare Omlette
@@ -304,65 +306,5 @@ namespace CoreCollectionsAsync
         }
     }
 
-    class TaskExecutor
-    {
-        private string name;
-        private int timeInMiliSec;
-        public TaskExecutor(string name, int ms)
-        {
-            this.timeInMiliSec = ms;
-            this.name = name;
-        }
-
-        public string Name { get { return this.name;  } }
-        public void Start()
-        {
-            #region With Events
-            for (int i = 0; i < 25; i++)
-            {
-                Thread.Sleep(this.timeInMiliSec / 25);
-                if (OnProgressUpdate != null)
-                    OnProgressUpdate(this, (i + 1) * 4);
-            }
-            if (OnFinish != null)
-                OnFinish(this);
-            #endregion
-        }
-        #region With Events
-        public delegate void ProgressEventHandler(Object sender, int percent);
-        public event ProgressEventHandler OnProgressUpdate;
-        
-        public delegate void TaskDoneEventHandler(Object sender);
-        public event TaskDoneEventHandler OnFinish;
-        #endregion
-    }
-
-    class Omlette:TaskExecutor
-    {
-        public Omlette(string name):base(name, 30000)
-        {
-
-        }
-    }
-
-    class Cucumber: TaskExecutor
-    {
-        public Cucumber(string name) : base(name, 2000)
-        { }
-    }
-
-    class Tomato: TaskExecutor
-    {
-        public Tomato(string name):base(name, 2000)
-        { }
-    }
-
-    class Toast: TaskExecutor
-    {
-        public Toast(string name):base(name, 15000)
-        {
-
-        }
-    }
 
 }

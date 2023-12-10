@@ -97,30 +97,16 @@ namespace CoreCollectionsAsync
         public static void StartDemo1()
         {
             account = new Account(0);
-            Thread [] tasks = new Thread[100];
             
+            Task[] tasks = new Task[100]; 
             for (int i = 0; i < tasks.Length; i++)
             {
-                tasks[i] = new Thread(Update);
+                tasks[i] = Task.Run(Update);    
             }
 
-            for (int i = 0; i < tasks.Length; i++)
-            {
-                tasks[i].Start();
-            }
-
-            #region Wait for all threads to finish
-            bool finished = false;
-            while (!finished)
-            {
-                finished = true;
-                for (int i = 0; i < 100; i++)
-                {
-                    if (tasks[i].IsAlive)
-                        finished = false;
-                }
-            }
-            #endregion
+            //Wait for all tasks to finish
+            Task.WhenAll(tasks).Wait();
+            
             Console.WriteLine($"Account's balance is {account.GetBalance()}");
         }
 

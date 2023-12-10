@@ -105,13 +105,29 @@ namespace CoreCollectionsAsync
 
         static void Main(string[] args)
         {
+            //1. Prepare Omlette with no progress bar
             //DelegateAndEventsDemo.RunDemo_1();
-            DelegateAndEventsDemo.RunDemo_2();
+
+            //2. Prepare Omlette with Progress and Finish Events
+            //DelegateAndEventsDemo.RunDemo_2();
+
+            //3. Prepare a full breakfast! no threads
             //BreakfastWIthThreads.MakeBreakfastDemo_1();
-            //BreakfastWIthThreads.MakeBreakfastDemo_2();
-            //BreakfastWIthThreads.MakeBreakfastDemo_3();
+
+            //4. Prepare a full breakfast using async methods! 
+            //BreakfastWIthThreads.MakeBreakfastDemoAsync_4().Wait();
+
+            //5. Prepare a full breakfast ysing async and a Any method + list of tasks            
+            //BreakfastWIthThreads.MakeBreakfastDemoAsync_5().Wait();
+
+            //6. Critical section
             //AccountTest.StartDemo1();
+
+            //7. Show a dead lock example
             //DeadLock.StartTest();
+
+            //8. Solution of events and threads exercise
+            //EventsExercise.Start2();
         }
 
 

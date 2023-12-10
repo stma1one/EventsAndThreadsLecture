@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace CoreCollectionsAsync
 {
@@ -42,12 +43,11 @@ namespace CoreCollectionsAsync
                 Name = "Ac2"
             };
 
-            Thread thread1 = new Thread(TransferMoneyFromAc1ToAc2);
-            Thread thread2 = new Thread(TransferMoneyFromAc2ToAc1);
-            thread1.Start();
-            thread2.Start();
-            thread1.Join();
-            thread2.Join();
+            
+            Task t1 = Task.Run(TransferMoneyFromAc1ToAc2);
+            Task t2 = Task.Run(TransferMoneyFromAc2ToAc1);
+            Task.WhenAll(t1, t2).Wait();
+
             Console.WriteLine("Operation Completed!");
         }
     }
