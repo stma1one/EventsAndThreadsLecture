@@ -112,7 +112,7 @@ namespace CoreCollectionsAsync
             //DelegateAndEventsDemo.RunDemo_2();
 
             //3. Prepare a full breakfast! no threads
-            BreakfastWIthThreads.MakeBreakfastDemo_1();
+            //BreakfastWIthThreads.MakeBreakfastDemo_1();
 
             //4. Prepare a full breakfast using async methods! 
             //BreakfastWIthThreads.MakeBreakfastDemoAsync_4().Wait();
