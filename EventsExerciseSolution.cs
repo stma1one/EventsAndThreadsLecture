@@ -104,7 +104,6 @@ namespace CoreCollectionsAsync
             ElectricCar ec = new ElectricCar(1);
             ec.StartEngine();
         }
-        static List<ElectricCar> cars = new List<ElectricCar>();
         
         public static void Start2()
         {
