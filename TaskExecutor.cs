@@ -16,10 +16,8 @@ namespace CoreCollectionsAsync
     class ProgressEventArgs :EventArgs
     {
         public int Percentage { get; set; }
-
         public ProgressEventArgs()
-        { Percentage = 0;}  
-
+        { }  
         public ProgressEventArgs(int percent)
         {
             Percentage = percent;

@@ -118,9 +118,7 @@ namespace CoreCollectionsAsync
             //BreakfastWIthThreads.MakeBreakfastDemo_2();
 
             //4. Prepare a full breakfast using async methods! 
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-            Console.WriteLine($"Main Thread Started");
+          
             BreakfastWIthThreads.MakeBreakfastDemoAsync_4().Wait();
 
             Console.WriteLine($"Main Thread Completed");
