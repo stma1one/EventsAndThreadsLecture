@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Diagnostics;
 
 namespace CoreCollectionsAsync
 {
@@ -105,18 +106,27 @@ namespace CoreCollectionsAsync
 
         static void Main(string[] args)
         {
-            DemoAsync().Wait();
+
             //1. Prepare Omlette with no progress bar
-            //DelegateAndEventsDemo.RunDemo_1();
+            // DelegateAndEventsDemo.RunDemo_1();
 
             //2. Prepare Omlette with Progress and Finish Events
-            //DelegateAndEventsDemo.RunDemo_2();
+            // DelegateAndEventsDemo.RunDemo_2();
 
             //3. Prepare a full breakfast! no threads
-            //BreakfastWIthThreads.MakeBreakfastDemo_1();
+            // BreakfastWIthThreads.MakeBreakfastDemo_1();
+            //BreakfastWIthThreads.MakeBreakfastDemo_2();
 
             //4. Prepare a full breakfast using async methods! 
-            //BreakfastWIthThreads.MakeBreakfastDemoAsync_4().Wait();
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            Console.WriteLine($"Main Thread Started");
+            BreakfastWIthThreads.MakeBreakfastDemoAsync_4().Wait();
+
+            Console.WriteLine($"Main Thread Completed");
+            stopwatch.Stop();
+            Console.WriteLine($"Main Thread Execution Time {stopwatch.ElapsedMilliseconds / 1000.0} Seconds");
+            Console.ReadKey();
 
             //5. Prepare a full breakfast ysing async and a Any method + list of tasks            
             //BreakfastWIthThreads.MakeBreakfastDemoAsync_5().Wait();

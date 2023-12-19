@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -56,17 +57,17 @@ namespace CoreCollectionsAsync
         }
 
         //The event OnProgressUpdate will fire this function! 
-        static void Progress(Object sender, int percent)
+        static void Progress(Object sender, ProgressEventArgs e )
         {
             if (sender is TaskExecutor)
             {
                 TaskExecutor obj = (TaskExecutor)sender;
-                Console.WriteLine($"Progress for {obj.Name}: {percent}%");
+                Console.WriteLine($"Progress for {obj.Name}: {e.Percentage}%");
             }
         }
 
         //The event OnFinish will fire this function! 
-        static void Finish(Object sender)
+        static void Finish(Object sender,EventArgs e)
         {
             if (sender is TaskExecutor)
             {
@@ -180,7 +181,7 @@ namespace CoreCollectionsAsync
 
         }
 
-        static void FinishWithRemoval(Object sender)
+        static void FinishWithRemoval(Object sender,EventArgs e)
         {
             if (sender is TaskExecutor)
             {
@@ -193,6 +194,7 @@ namespace CoreCollectionsAsync
 
         public static async Task  MakeBreakfastDemoAsync_4()
         {
+            
             DateTime start = DateTime.Now;
             //Prepare Omlette
             Console.WriteLine($"Start preparing the Omlette at {DateTime.Now.ToString()}");
@@ -206,7 +208,7 @@ namespace CoreCollectionsAsync
             //Prepare Salad
             Console.WriteLine($"Start preparing the Salad at {DateTime.Now.ToString()}");
             Task saladTask = Task.Run(PrepareSalad);
-            
+
 
             //wait for all tasks to be over!
             await Task.WhenAll(omlTask, toastTask, saladTask);
@@ -269,7 +271,7 @@ namespace CoreCollectionsAsync
             Console.WriteLine($"Start preparing the Omlette at {DateTime.Now.ToString()}");
             Omlette myOmlette = new Omlette("myOmlette");
             myOmlette.OnProgressUpdate += Progress;
-            await Task.Run(myOmlette.Start);
+            await myOmlette.StartAsync();
             Console.WriteLine("Omlete is ready");
             return myOmlette;
         }
@@ -279,7 +281,7 @@ namespace CoreCollectionsAsync
             Console.WriteLine($"Start preparing the toast at {DateTime.Now.ToString()}");
             Toast toast = new Toast("toast");
             toast.OnProgressUpdate += Progress;
-            await Task.Run(toast.Start);
+            await toast.StartAsync();
             Console.WriteLine("Toast is ready!");
             return toast;
         }
