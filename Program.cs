@@ -105,6 +105,7 @@ namespace CoreCollectionsAsync
 
         static void Main(string[] args)
         {
+            DemoAsync().Wait();
             //1. Prepare Omlette with no progress bar
             //DelegateAndEventsDemo.RunDemo_1();
 
